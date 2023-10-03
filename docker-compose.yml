@@ -16,7 +16,7 @@ services:
       CLUSTER_NAME: "hadoop-cluster"
       CLUSTER_SIZE: 2
     networks: 
-      - mysql_net
+      - hadoop_net
   datanode1:
     image: apache/hadoop:3.3.6
     hostname: datanode1
@@ -30,7 +30,7 @@ services:
       CLUSTER_NAME: "hadoop-cluster" 
       CLUSTER_SIZE: 2
     networks: 
-      - mysql_net
+      - hadoop_net
     depends_on:
       - namenode
   datanode2:
@@ -46,7 +46,7 @@ services:
       CLUSTER_NAME: "hadoop-cluster" 
       CLUSTER_SIZE: 2
     networks: 
-      - mysql_net
+      - hadoop_net
     depends_on:
       - namenode
   resourcemanager:
@@ -62,7 +62,7 @@ services:
       CLUSTER_NAME: "hadoop-cluster"
       CLUSTER_SIZE: 2
     networks: 
-      - mysql_net
+      - hadoop_net
     depends_on:
       - namenode
       - datanode1
@@ -80,7 +80,7 @@ services:
       CLUSTER_NAME: "hadoop-cluster"
       CLUSTER_SIZE: 2
     networks: 
-      - mysql_net
+      - hadoop_net
     depends_on:
       - namenode
       - datanode1
