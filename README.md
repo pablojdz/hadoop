@@ -1,9 +1,9 @@
 ### Deploy Hadoop cluster using Docker
-Run the docker containers
-<li> docker-compose up -d </li>
+<li> Run the docker containers </li>
+ <p> docker-compose up -d </p>
 
-Accessing the UI
-<li> The Namenode UI can be accessed at http://localhost:9870/ and the ResourceManager UI can be accessed at http://localhost:8088/ </li>
+<li> Accessing the UI</li>
+<p> The Namenode UI can be accessed at http://localhost:9870/ and the ResourceManager UI can be accessed at http://localhost:8088/ </p>
 
-Accessing the NameNode
-<li> docker exec -it namenode bash </li>
+<li> Accessing the NameNode </li>
+<p> docker exec -it namenode bash </p>
