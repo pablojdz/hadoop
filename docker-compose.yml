@@ -8,11 +8,13 @@ services:
     ports:
       - 9870:9870
     volumes:
-      - ./hadoop-data/namenode:/hadoop/dfs/name
+      - ./hadoop-data/namenode:/hadoop/dfs
+      - ./workspace:/opt/hadoop/workspace
     env_file:
       - ./config
     environment:
-      ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+      HADOOP_HOME: "/opt/hadoop"
+      ENSURE_NAMENODE_DIR: "/hadoop/dfs/name"
       CLUSTER_NAME: "hadoop-cluster"
       CLUSTER_SIZE: 2
     networks: 
@@ -23,12 +25,12 @@ services:
     container_name: datanode1
     command: ["hdfs", "datanode"]
     volumes:
-      - ./hadoop-data/datanode1:/hadoop/dfs/data
+      - ./hadoop-data/datanode1:/hadoop/dfs
     env_file:
       - ./config
-    ports:
-      - "50075:50075"
     environment:
+      HADOOP_HOME: "/opt/hadoop"
+      ENSURE_DATANODE_DIR: "/hadoop/dfs/data"
       CLUSTER_NAME: "hadoop-cluster" 
       CLUSTER_SIZE: 2
     networks: 
@@ -41,12 +43,12 @@ services:
     container_name: datanode2
     command: ["hdfs", "datanode"]
     volumes:
-      - ./hadoop-data/datanode2:/hadoop/dfs/data
+      - ./hadoop-data/datanode2:/hadoop/dfs
     env_file:
       - ./config 
-    ports:
-      - "50076:50075"
     environment:
+      HADOOP_HOME: "/opt/hadoop"
+      ENSURE_DATANODE_DIR: "/hadoop/dfs/data"
       CLUSTER_NAME: "hadoop-cluster" 
       CLUSTER_SIZE: 2
     networks: 
@@ -63,6 +65,7 @@ services:
     env_file:
       - ./config
     environment:
+      HADOOP_HOME: "/opt/hadoop"
       CLUSTER_NAME: "hadoop-cluster"
       CLUSTER_SIZE: 2
     networks: 
@@ -71,8 +74,6 @@ services:
       - namenode
       - datanode1
       - datanode2
-    volumes:
-      - ./test.sh:/opt/test.sh
   nodemanager:
     image: apache/hadoop:3.3.6
     hostname: nodemanager
@@ -81,6 +82,7 @@ services:
     env_file:
       - ./config
     environment:
+      HADOOP_HOME: "/opt/hadoop"
       CLUSTER_NAME: "hadoop-cluster"
       CLUSTER_SIZE: 2
     networks: 
